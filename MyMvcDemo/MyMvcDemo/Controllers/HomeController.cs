@@ -39,7 +39,13 @@ namespace MyMvcDemo.Controllers
         [Route("privacy-terms")]
         public IActionResult Privacy()
         {
-            return View();
+            //return View();
+            //return Json("[]");
+            //return Content("Anything");
+
+            var fileContents = System.IO.File.ReadAllBytes(@"C:\files\file.txt");
+            var fileDownloadName = "hello.txt";
+            return File(fileContents, System.Net.Mime.MediaTypeNames.Application.Octet, fileDownloadName);
         }
 
         [Route("error")]
