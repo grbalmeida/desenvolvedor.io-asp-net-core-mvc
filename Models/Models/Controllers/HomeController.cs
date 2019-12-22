@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
 
@@ -12,7 +10,16 @@ namespace Models.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var movie = new Movie
+            {
+                Title = "Hi",
+                ReleaseDate = DateTime.Now,
+                Genre = null,
+                Rating = 10,
+                Price = 20000
+            };
+
+            return RedirectToAction(nameof(Privacy), movie);
         }
 
         public IActionResult About()
@@ -29,8 +36,18 @@ namespace Models.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(Movie movie)
         {
+            if (ModelState.IsValid)
+            {
+            
+            }
+
+            foreach (var error in ModelState.Values.SelectMany(m => m.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+
             return View();
         }
 
