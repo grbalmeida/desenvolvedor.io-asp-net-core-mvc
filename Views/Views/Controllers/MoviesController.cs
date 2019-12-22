@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Views.Models;
 
 namespace Views.Controllers
 {
@@ -8,6 +9,17 @@ namespace Views.Controllers
         public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View(movie);
         }
     }
 }
