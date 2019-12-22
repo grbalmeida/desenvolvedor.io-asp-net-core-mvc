@@ -1,16 +1,24 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyMvcDemo.Models;
 
 namespace MyMvcDemo.Controllers
 {
+    [Route("")]
+    [Route("customer-management")]
     public class HomeController : Controller
     {
-        public IActionResult Index(string id, string category)
+        [Route("")]
+        [Route("home-page")]
+        [Route("home-page/{id:int}/{category:guid}")]
+        public IActionResult Index(int id, Guid category)
         {
             return View();
         }
 
+        [Route("about")]
+        [Route("about-us")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -18,6 +26,8 @@ namespace MyMvcDemo.Controllers
             return View();
         }
 
+        [Route("contact")]
+        [Route("contact-us")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -25,11 +35,14 @@ namespace MyMvcDemo.Controllers
             return View();
         }
 
+        [Route("privacy")]
+        [Route("privacy-terms")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

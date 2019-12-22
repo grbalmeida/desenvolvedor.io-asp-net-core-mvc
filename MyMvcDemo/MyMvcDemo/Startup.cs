@@ -49,15 +49,15 @@ namespace MyMvcDemo
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "modules",
-                    template: "Management/{controller=Home}/{action=Index}/{id?}"
-                );
+                //routes.MapRoute(
+                //    name: "modules",
+                //    template: "Management/{controller=Home}/{action=Index}/{id?}"
+                //);
 
-                routes.MapRoute(
-                    name: "category",
-                    template: "{controller=Home}/{action=Index}/{id}/{category?}"
-                );
+                //routes.MapRoute(
+                //    name: "category",
+                //    template: "{controller=Home}/{action=Index}/{id}/{category?}"
+                //);
 
                 routes.MapRoute(
                     name: "default",
