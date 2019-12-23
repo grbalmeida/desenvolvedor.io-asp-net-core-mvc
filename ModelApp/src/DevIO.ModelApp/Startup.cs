@@ -23,6 +23,8 @@ namespace DevIO.ModelApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
