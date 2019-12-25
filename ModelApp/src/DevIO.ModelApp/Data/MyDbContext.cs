@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DevIO.ModelApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevIO.ModelApp.Data
 {
@@ -9,5 +10,7 @@ namespace DevIO.ModelApp.Data
         {
 
         }
+
+        public DbSet<Student> Students { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace DevIO.ModelApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyDbContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("MyModelAppDb"));
+                options.UseSqlServer(Configuration.GetConnectionString("MyDbContext"));
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
