@@ -1,1 +1,6 @@
-﻿Hello!
+﻿@using DevIO.ModelApp.Data
+@inject IOrderRepository OrderRepository
+
+Hello!
+
+@OrderRepository.GetOrder().Id

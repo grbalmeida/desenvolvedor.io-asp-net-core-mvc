@@ -9,7 +9,6 @@
     <Folder Include="Modules\Sales\Models\" />
     <Folder Include="Modules\Products\Data\" />
     <Folder Include="Modules\Products\Models\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
