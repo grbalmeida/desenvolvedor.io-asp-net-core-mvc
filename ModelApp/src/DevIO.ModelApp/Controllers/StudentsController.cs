@@ -30,7 +30,7 @@ namespace DevIO.ModelApp.Controllers
 
             var student2 = _context.Students.Find(student.Id);
             var student3 = _context.Students.FirstOrDefault(s => s.Email == "eduardo@eduardopires.net.br");
-            var student4 = _context.Students.Where(s => s.Name == "Eduardo");
+            var student4 = _context.Students.Where(s => s.Name == "Eduardo").ToList();
 
             student.Name = "John";
 
@@ -38,6 +38,7 @@ namespace DevIO.ModelApp.Controllers
             _context.SaveChanges();
 
             _context.Students.Remove(student);
+            _context.SaveChanges();
 
             return View();
         }
