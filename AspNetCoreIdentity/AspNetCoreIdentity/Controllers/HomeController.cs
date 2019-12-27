@@ -40,6 +40,13 @@ namespace AspNetCoreIdentity.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin, Manager")]
+        [Route("secret")]
+        public IActionResult Secret()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
