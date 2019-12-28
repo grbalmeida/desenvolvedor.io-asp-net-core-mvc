@@ -1,4 +1,6 @@
 ﻿using AspNetCoreIdentity.Areas.Identity.Data;
+using AspNetCoreIdentity.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,6 +39,15 @@ namespace AspNetCoreIdentity
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CanDelete", policy => policy.RequireClaim("CanDelete"));
+                options.AddPolicy("CanRead", policy => policy.Requirements.Add(new PermissionRequired("CanRead")));
+                options.AddPolicy("CanWrite", policy => policy.Requirements.Add(new PermissionRequired("CanWrite")));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, PermissionRequiredHandler>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
