@@ -1,4 +1,5 @@
 ﻿using AspNetCoreIdentity.Config;
+using KissLog.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -49,10 +50,12 @@ namespace AspNetCoreIdentity
                 app.UseHsts();
             }
 
+            app.UseKissLogMiddleware();
+            app.UseKissLogConfig(Configuration);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
 
             app.UseMvc(routes =>
