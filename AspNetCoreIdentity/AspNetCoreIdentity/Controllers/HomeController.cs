@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreIdentity.Extensions;
 
 namespace AspNetCoreIdentity.Controllers
 {
@@ -55,6 +56,30 @@ namespace AspNetCoreIdentity.Controllers
 
         [Authorize(Policy = "CanWrite")]
         public IActionResult SecretClaimWrite()
+        {
+            return View("Secret");
+        }
+
+        [ClaimAuthorize("Products", "Read")]
+        public IActionResult ProductsRead()
+        {
+            return View("Secret");
+        }
+
+        [ClaimAuthorize("Products", "Add")]
+        public IActionResult ProductsAdd()
+        {
+            return View("Secret");
+        }
+
+        [ClaimAuthorize("Products", "Edit")]
+        public IActionResult ProductsEdit()
+        {
+            return View("Secret");
+        }
+
+        [ClaimAuthorize("Products", "Delete")]
+        public IActionResult ProductsDelete()
         {
             return View("Secret");
         }
