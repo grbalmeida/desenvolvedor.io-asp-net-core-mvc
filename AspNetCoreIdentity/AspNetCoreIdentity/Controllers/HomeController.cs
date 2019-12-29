@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -38,7 +35,8 @@ namespace AspNetCoreIdentity.Controllers
         [Route("privacy")]
         public IActionResult Privacy()
         {
-            return View();
+            throw new Exception("Error");
+            // return View();
         }
 
         [Authorize(Roles = "Admin, Manager")]
@@ -84,10 +82,35 @@ namespace AspNetCoreIdentity.Controllers
             return View("Secret");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("error/{id:length(3,3)}")]
+        public IActionResult Error(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var errorModel = new ErrorViewModel();
+
+            if (id == 500)
+            {
+                errorModel.Message = "An error has occurred! Please try again later or contact our suport.";
+                errorModel.Message = "An error has occurred!";
+                errorModel.ErrorCode = id;
+            }
+            else if (id == 404)
+            {
+                errorModel.Message = "The page you are looking for does not exist! <br />For questions please contact our support";
+                errorModel.Title = "Oops! Page not found.";
+                errorModel.ErrorCode = id;
+            }
+            else if (id == 403)
+            {
+                errorModel.Message = "You are not allowed to do this.";
+                errorModel.Title = "Access denied";
+                errorModel.ErrorCode = id;
+            }
+            else
+            {
+                return StatusCode(id);
+            }
+
+            return View("Error", errorModel);
         }
     }
 }
