@@ -13,6 +13,7 @@ namespace AspNetCoreIdentity.Config
             services.AddSingleton<IAuthorizationHandler, PermissionRequiredHandler>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(context => Logger.Factory.Get());
+            services.AddScoped<AuditFilter>();
 
             return services;
         }
