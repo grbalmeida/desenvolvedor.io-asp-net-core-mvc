@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcBasicApp.Models
+namespace MyFullMvcApp.Models
 {
     public class Product : Entity
     {

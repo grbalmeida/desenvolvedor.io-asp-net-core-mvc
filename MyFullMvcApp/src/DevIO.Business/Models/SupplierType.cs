@@ -1,4 +1,4 @@
-﻿namespace MvcBasicApp.Models
+﻿namespace MyFullMvcApp.Models
 {
     public enum SupplierType
     {

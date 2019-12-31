@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MvcBasicApp.Models
+namespace MyFullMvcApp.Models
 {
     public class Supplier : Entity
     {
