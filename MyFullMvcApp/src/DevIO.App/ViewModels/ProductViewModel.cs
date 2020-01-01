@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +10,10 @@ namespace DevIO.App.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
+
+        [Required(ErrorMessage = "The {0} field is required")]
+        [DisplayName("Supplier")]
+        public Guid SupplierId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required")]
         [StringLength(200, ErrorMessage = "{0} field must be between {2} and {1} characters", MinimumLength = 2)]
@@ -35,5 +40,6 @@ namespace DevIO.App.ViewModels
         /* EF - Relations */
 
         public SupplierViewModel Supplier { get; set; }
+        public IEnumerable<SupplierViewModel> Suppliers { get; set; }
     }
 }

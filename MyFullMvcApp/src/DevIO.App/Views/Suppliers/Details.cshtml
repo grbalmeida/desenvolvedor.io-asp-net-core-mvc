@@ -1,0 +1,42 @@
+﻿@model DevIO.App.ViewModels.SupplierViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SupplierViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Document)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SupplierType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
