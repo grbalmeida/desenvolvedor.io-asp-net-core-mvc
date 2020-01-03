@@ -2,7 +2,7 @@
 {
     public enum SupplierType
     {
-        LegalEntity = 1,
-        NaturalPerson
+        NaturalPerson = 1,
+        LegalEntity = 2
     }
 }
