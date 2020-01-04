@@ -6,6 +6,8 @@ using DevIO.Business.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
 using MyFullMvcApp.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace DevIO.App.Controllers
 {
@@ -54,9 +56,18 @@ namespace DevIO.App.Controllers
 
             if (!ModelState.IsValid) return View(productViewModel);
 
+            var imagePrefix = Guid.NewGuid() + "_";
+
+            productViewModel.Image = imagePrefix + productViewModel.UploadImage.FileName;
+
+            if (!await UploadFile(productViewModel.UploadImage, imagePrefix))
+            {
+                return View(productViewModel);
+            }
+
             await _productRepository.Add(_mapper.Map<Product>(productViewModel));
 
-            return View(productViewModel);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(Guid id)
@@ -114,6 +125,26 @@ namespace DevIO.App.Controllers
         {
             productViewModel.Suppliers = _mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierRepository.GetAll());
             return productViewModel;
+        }
+
+        private async Task<bool> UploadFile(IFormFile file, string imagePrefix)
+        {
+            if (file.Length <= 0) return false;
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/product-images", imagePrefix + file.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "A file with this name already exists!");
+                return false;
+            }
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return true;
         }
     }
 }
