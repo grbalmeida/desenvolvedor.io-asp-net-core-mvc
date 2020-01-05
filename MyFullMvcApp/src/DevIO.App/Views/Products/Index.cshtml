@@ -48,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Supplier.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @item.Price.ToString("C")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)

@@ -11,6 +11,11 @@ using DevIO.Data.Context;
 using DevIO.Business.Interfaces;
 using DevIO.Data.Repository;
 using AutoMapper;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
+using DevIO.App.Extensions;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace DevIO.App
 {
@@ -44,12 +49,26 @@ namespace DevIO.App
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((x, y) => "The filled value is invalid for this field.");
+                options.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(x => "This field needs to be completed.");
+                options.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() => "This field needs to be completed.");
+                options.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() => "The body in the request must not be empty.");
+                options.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(x => "The filled value is invalid for this field.");
+                options.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() => "The filled value is invalid for this field.");
+                options.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(() => "The field must be numeric.");
+                options.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor(x => "The filled value is invalid for this field.");
+                options.ModelBindingMessageProvider.SetValueIsInvalidAccessor(x => "The filled value is invalid for this field.");
+                options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => "The field must be numeric.");
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(x => "This field needs to be completed.");
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<MyDbContext>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IValidationAttributeAdapterProvider, CurrencyValidationAttributeAdapterProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +90,16 @@ namespace DevIO.App
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            var defaultCulture = new CultureInfo("pt-BR");
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            };
+
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseMvc(routes =>
             {
