@@ -85,9 +85,30 @@ namespace DevIO.App.Controllers
         {
             if (id != productViewModel.Id) return NotFound();
 
-            if (!ModelState.IsValid) return View(productViewModel);
+            var productUpdate = await GetProduct(id);
+            productViewModel.Supplier = productUpdate.Supplier;
+            productViewModel.Image = productUpdate.Image;
 
-            await _productRepository.Update(_mapper.Map<Product>(productViewModel));
+            if (!ModelState.IsValid) return View(productViewModel);
+            
+            if (productViewModel.UploadImage != null)
+            {
+                var imagePrefix = Guid.NewGuid() + "_";
+
+                if (!await UploadFile(productViewModel.UploadImage, imagePrefix))
+                {
+                    return View(productViewModel);
+                }
+
+                productUpdate.Image = imagePrefix + productViewModel.UploadImage.FileName;
+            }
+
+            productUpdate.Name = productViewModel.Name;
+            productUpdate.Description = productViewModel.Description;
+            productUpdate.Price = productViewModel.Price;
+            productUpdate.Active = productViewModel.Active;
+
+            await _productRepository.Update(_mapper.Map<Product>(productUpdate));
 
             return RedirectToAction(nameof(Index));
         }
