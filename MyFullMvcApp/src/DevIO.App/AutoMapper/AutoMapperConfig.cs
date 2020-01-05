@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DevIO.App.ViewModels;
-using MyFullMvcApp.Models;
+using DevIO.Business.Models;
 
 namespace DevIO.App.AutoMapper
 {

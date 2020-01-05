@@ -5,9 +5,9 @@ using DevIO.App.ViewModels;
 using DevIO.Business.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
-using MyFullMvcApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using DevIO.Business.Models;
 
 namespace DevIO.App.Controllers
 {

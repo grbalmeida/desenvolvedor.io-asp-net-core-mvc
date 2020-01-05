@@ -1,42 +1,40 @@
-﻿@model DevIO.App.ViewModels.SupplierViewModel
+﻿@using DevIO.App.Extensions
+@model DevIO.App.ViewModels.SupplierViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h1>@ViewData["Title"]</h1>
 
 <div>
-    <h4>SupplierViewModel</h4>
+    <h4>Read only information</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
+    <dl class="row">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Document)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Document)
+        <dd class="col-sm-10">
+            @this.FormatsDocument(Model.SupplierType, Model.Document)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SupplierType)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SupplierType)
-        </dd>
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Active)
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Active)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-info" asp-action="Index">Back to List</a>
 </div>
+
+
+<partial name="_AddressDetails" />

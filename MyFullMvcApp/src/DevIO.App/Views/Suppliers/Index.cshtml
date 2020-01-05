@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DevIO.App.ViewModels.SupplierViewModel>
+﻿@using DevIO.App.Extensions
+@model IEnumerable<DevIO.App.ViewModels.SupplierViewModel>
 
 @{
     Layout = "_Layout";
@@ -32,7 +33,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Document)
+                @this.FormatsDocument(item.SupplierType, item.Document)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Active)

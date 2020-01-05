@@ -1,7 +1,7 @@
 ﻿using DevIO.Business.Interfaces;
+using DevIO.Business.Models;
 using DevIO.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using MyFullMvcApp.Models;
 using System;
 using System.Threading.Tasks;
 

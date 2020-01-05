@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DevIO.Business.Interfaces;
+using DevIO.Business.Models;
 using DevIO.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using MyFullMvcApp.Models;
 
 namespace DevIO.Data.Repository
 {

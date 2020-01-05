@@ -1,4 +1,4 @@
-﻿namespace MyFullMvcApp.Models
+﻿namespace DevIO.Business.Models
 {
     public enum SupplierType
     {
