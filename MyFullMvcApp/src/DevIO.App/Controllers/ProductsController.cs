@@ -15,15 +15,19 @@ namespace DevIO.App.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly ISupplierRepository _supplierRepository;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
         public ProductsController(
             IProductRepository productRepository,
             ISupplierRepository supplierRepository,
-            IMapper mapper)
+            IProductService productService,
+            IMapper mapper,
+            INotifier notifier) : base(notifier)
         {
             _productRepository = productRepository;
             _supplierRepository = supplierRepository;
+            _productService = productService;
             _mapper = mapper;
         }
 
@@ -69,7 +73,9 @@ namespace DevIO.App.Controllers
                 return View(productViewModel);
             }
 
-            await _productRepository.Add(_mapper.Map<Product>(productViewModel));
+            await _productService.Add(_mapper.Map<Product>(productViewModel));
+
+            if (!ValidOperation()) return View(productViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -114,7 +120,9 @@ namespace DevIO.App.Controllers
             productUpdate.Price = productViewModel.Price;
             productUpdate.Active = productViewModel.Active;
 
-            await _productRepository.Update(_mapper.Map<Product>(productUpdate));
+            await _productService.Update(_mapper.Map<Product>(productUpdate));
+
+            if (!ValidOperation()) return View(productViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -138,7 +146,11 @@ namespace DevIO.App.Controllers
 
             if (product == null) return NotFound();
 
-            await _productRepository.Remove(id);
+            await _productService.Remove(id);
+
+            if (!ValidOperation()) return View(product);
+
+            TempData["Success"] = "Product successfully deleted!";
 
             return RedirectToAction(nameof(Index));
         }
