@@ -29,7 +29,6 @@ namespace DevIO.App.ViewModels
 
         public string Image { get; set; }
 
-
         [Required(ErrorMessage = "The {0} field is required")]
         [Currency]
         public decimal Price { get; set; }

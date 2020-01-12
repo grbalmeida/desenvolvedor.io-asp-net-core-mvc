@@ -54,7 +54,13 @@
             </dd>
         </dl>
         <div>
-            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a
+               disable-by-claim-name="Product"
+               disable-by-claim-value="Edit"
+               class="btn btn-primary"
+               asp-action="Edit"
+               asp-route-id="@Model.Id"
+            >Edit</a>
             <a class="btn btn-info" href="javascript:window.history.back();">Back to List</a>
         </div>
     </div>

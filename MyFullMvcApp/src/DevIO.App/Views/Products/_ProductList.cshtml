@@ -41,13 +41,27 @@
                     @Html.DisplayFor(modelItem => item.Active)
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-warning" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">
+                    <a class="btn btn-info" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">
                         <span class="fa fa-search"></span>
                     </a>
-                    <a class="btn btn-info" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">
+                    <a
+                       class="btn btn-warning"
+                       disable-by-claim-name="Product"
+                       disable-by-claim-value="Edit"
+                       asp-controller="Products"
+                       asp-action="Edit"
+                       asp-route-id="@item.Id"
+                    >
                         <span class="fa fa-pencil-alt"></span>
                     </a>
-                    <a class="btn btn-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">
+                    <a
+                       class="btn btn-danger"
+                       disable-by-claim-name="Product"
+                       disable-by-claim-value="Delete"
+                       asp-controller="Products"
+                       asp-action="Delete"
+                       asp-route-id="@item.Id"
+                    >
                         <span class="fa fa-trash"></span>
                     </a>
                 </td>

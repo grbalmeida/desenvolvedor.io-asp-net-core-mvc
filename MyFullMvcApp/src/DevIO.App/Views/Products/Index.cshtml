@@ -8,7 +8,12 @@
 <hr />
 <vc:Summary></vc:Summary>
 <p>
-    <a class="btn btn-info" asp-action="Create">New Product</a>
+    <a
+       disable-by-claim-name="Product"
+       disable-by-claim-value="Add"
+       class="btn btn-info"
+       asp-action="Create"
+    >New Product</a>
 </p>
 
 <partial name="_ProductList" />
