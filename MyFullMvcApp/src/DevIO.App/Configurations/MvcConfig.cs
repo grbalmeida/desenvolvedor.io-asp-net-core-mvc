@@ -19,6 +19,8 @@ namespace DevIO.App.Configurations
                 options.ModelBindingMessageProvider.SetValueIsInvalidAccessor(x => "The filled value is invalid for this field.");
                 options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => "The field must be numeric.");
                 options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(x => "This field needs to be completed.");
+
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
